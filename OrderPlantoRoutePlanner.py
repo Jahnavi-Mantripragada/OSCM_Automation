@@ -26,6 +26,29 @@ st.title("Ordering Plan to Route Planner")
 
 # Step 1: Upload Location and Address File
 st.header("Step 1: Upload Location and Address File")
+st.text("You can use this template: ")
+# Create a sample template dynamically
+template_data = {
+    "Location": ["Mumbai", "Delhi", "Bengaluru"],
+    "Address":["Unilever House, B. D. Sawant Marg, Chakala, Mumbai, Maharashtra 400099", 
+                "8th Floor Mohante Building, Tolstoy Marg, New Delhi, Delhi 110001",
+                "64 Main Road, Whitefield, Bengaluru, Karnataka 560066"]
+}
+template_df = pd.DataFrame(template_data)
+
+# Save DataFrame to Excel in Memory
+output = BytesIO()
+with pd.ExcelWriter(output, engine="xlsxwriter") as writer:
+    template_df.to_excel(writer, index=False, sheet_name="Template")
+
+# Provide Download Button
+st.download_button(
+    label="Download Template File",
+    data=output.getvalue(),
+    file_name="template_file.xlsx",
+    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+)
+
 uploaded_address_file = st.file_uploader("Choose a file", type=["csv", "xlsx"])
 
 if uploaded_address_file:
