@@ -76,7 +76,7 @@ if uploaded_address_file:
 
     city_coordinates = [
     {"City": "Ahmedabad", "Latitude": 23.0225, "Longitude": 72.5714},
-    {"City": "Bangalore", "Latitude": 12.9716, "Longitude": 77.5946},
+    {"City": "Bengaluru", "Latitude": 12.9716, "Longitude": 77.5946},
     {"City": "Chandigarh", "Latitude": 30.7333, "Longitude": 76.7794},
     {"City": "Chennai", "Latitude": 13.0827, "Longitude": 80.2707},
     {"City": "Coimbatore", "Latitude": 11.0168, "Longitude": 76.9558},
