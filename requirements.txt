@@ -1,2 +1,3 @@
+pip>=23.1
 opencage.geocoder
 # Add any other required libraries here
