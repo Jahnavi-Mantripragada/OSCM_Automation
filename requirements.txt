@@ -2,4 +2,5 @@ streamlit
 geopy
 pandas
 openpyxl
+xlsxwriter
 # Add any other required libraries here
