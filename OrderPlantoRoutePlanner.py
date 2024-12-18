@@ -134,7 +134,7 @@ if uploaded_address_file:
         # Merge city_coordinates into address_data based on Location
     address_data = pd.merge(
         address_data,
-        city_coordinates,
+        city_df,
         left_on="Location",  # Column in address_data
         right_on="City",     # Column in city_coordinates
         how="left"           # Keep all rows from address_data
