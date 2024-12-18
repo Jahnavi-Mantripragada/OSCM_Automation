@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 from io import BytesIO
+import math
 # from opencage.geocoder import OpenCageGeocode
 
 # # Function to Fetch Latitude and Longitude
@@ -287,19 +288,18 @@ if uploaded_address_file:
             # Display Merged Table
             st.dataframe(merged_df)
 
-            # Step 1: Calculate the scaling factor
+            
+            # Step 1: Calculate the power of 10 for scaling
             max_order_size = merged_df["Order Size"].max()
-            target_max_value = 999  # Maximum value in the target range
-            scaling_factor = max_order_size / target_max_value
-
-            # Display scaling factor to the user
-            st.write(f"The calculated scaling factor to fit values in [1-{target_max_value}] is: {scaling_factor:.2f}")
+            num_digits = math.floor(math.log10(max_order_size)) + 1  # Find number of digits
+            scaling_factor = 10 ** (num_digits - 3)  # Adjust to bring max value to 3 digits
 
             # Step 2: Scale the Order Size column
             merged_df["Order Size"] = (merged_df["Order Size"] / scaling_factor).round(0)
 
-            # Display updated data
-            st.write("Updated Data with Scaled Order Size:")
+            # Display the scaling factor to the user
+            st.write(f"The scaling factor applied (10^{num_digits - 3}) is: {scaling_factor}")
+            st.write("Updated Address Data with Scaled Order Size:")
             st.dataframe(merged_df)
 
 
