@@ -37,8 +37,8 @@ if uploaded_address_file:
     st.dataframe(address_data)
 
     # Apply geocoding to get latitude and longitude
-   # with st.spinner("Fetching Latitude and Longitude..."):
-    #    address_data[["Latitude", "Longitude"]] = address_data["Address"].apply(get_lat_long)
+    with st.spinner("Fetching Latitude and Longitude..."):
+        address_data[["Latitude", "Longitude"]] = address_data["Address"].apply(get_lat_long)
     st.success("Geocoding Complete!")
     st.dataframe(address_data)
 
