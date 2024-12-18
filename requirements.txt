@@ -1,3 +1,4 @@
-pip>=23.1
-opencage.geocoder
+streamlit
+geopy
+pandas
 # Add any other required libraries here
