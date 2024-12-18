@@ -1,21 +1,21 @@
 import streamlit as st
 import pandas as pd
 from io import BytesIO
-from opencage.geocoder import OpenCageGeocode
+# from opencage.geocoder import OpenCageGeocode
 
-# Function to Fetch Latitude and Longitude
-def get_lat_long(address):
-    api_key = 'f84de8bb057943e8a27584749c31f68e'
-    geocoder = OpenCageGeocode(api_key)
-    try:
-        result = geocoder.geocode(address)
-        if result:
-            return pd.Series([result[0]['geometry']['lat'], result[0]['geometry']['lng']])
-        else:
-            return pd.Series([None, None])
-    except Exception as e:
-        print(f"Error: {e}")
-        return pd.Series([None, None])
+# # Function to Fetch Latitude and Longitude
+# def get_lat_long(address):
+#     api_key = 'f84de8bb057943e8a27584749c31f68e'
+#     geocoder = OpenCageGeocode(api_key)
+#     try:
+#         result = geocoder.geocode(address)
+#         if result:
+#             return pd.Series([result[0]['geometry']['lat'], result[0]['geometry']['lng']])
+#         else:
+#             return pd.Series([None, None])
+#     except Exception as e:
+#         print(f"Error: {e}")
+#         return pd.Series([None, None])
 
 # Detect columns with date-like values dynamically
 def detect_date_columns(df):
@@ -36,20 +36,90 @@ if uploaded_address_file:
         address_data = pd.read_excel(uploaded_address_file)
     st.dataframe(address_data)
 
-    # Apply geocoding to get latitude and longitude
-    with st.spinner("Fetching Latitude and Longitude..."):
-        address_data[["Latitude", "Longitude"]] = address_data["Address"].apply(get_lat_long)
-    st.success("Geocoding Complete!")
-    st.dataframe(address_data)
+    # # Apply geocoding to get latitude and longitude
+    # with st.spinner("Fetching Latitude and Longitude..."):
+    #     address_data[["Latitude", "Longitude"]] = address_data["Address"].apply(get_lat_long)
+    # st.success("Geocoding Complete!")
+    # st.dataframe(address_data)
 
-    # Download updated address data
-    csv_address = address_data.to_csv(index=False)
-    st.download_button(
-        label="Download Address Data with Coordinates",
-        data=csv_address,
-        file_name="address_with_coordinates.csv",
-        mime="text/csv"
+    # # Download updated address data
+    # csv_address = address_data.to_csv(index=False)
+    # st.download_button(
+    #     label="Download Address Data with Coordinates",
+    #     data=csv_address,
+    #     file_name="address_with_coordinates.csv",
+    #     mime="text/csv"
+    # )
+
+    city_coordinates = [
+    {"City": "Ahmedabad", "Latitude": 23.0225, "Longitude": 72.5714},
+    {"City": "Bangalore", "Latitude": 12.9716, "Longitude": 77.5946},
+    {"City": "Chandigarh", "Latitude": 30.7333, "Longitude": 76.7794},
+    {"City": "Chennai", "Latitude": 13.0827, "Longitude": 80.2707},
+    {"City": "Coimbatore", "Latitude": 11.0168, "Longitude": 76.9558},
+    {"City": "Delhi", "Latitude": 28.7041, "Longitude": 77.1025},
+    {"City": "Hyderabad", "Latitude": 17.3850, "Longitude": 78.4867},
+    {"City": "Indore", "Latitude": 22.7196, "Longitude": 75.8577},
+    {"City": "Jaipur", "Latitude": 26.9124, "Longitude": 75.7873},
+    {"City": "Kolkata", "Latitude": 22.5726, "Longitude": 88.3639},
+    {"City": "Lucknow", "Latitude": 26.8467, "Longitude": 80.9462},
+    {"City": "Mumbai", "Latitude": 19.0760, "Longitude": 72.8777},
+    {"City": "Nagpur", "Latitude": 21.1458, "Longitude": 79.0882},
+    {"City": "Patna", "Latitude": 25.5941, "Longitude": 85.1376},
+    {"City": "Pune", "Latitude": 18.5204, "Longitude": 73.8567},
+    {"City": "Surat", "Latitude": 21.1702, "Longitude": 72.8311},
+    {"City": "Varanasi", "Latitude": 25.3176, "Longitude": 82.9739},
+    {"City": "Bhopal", "Latitude": 23.2599, "Longitude": 77.4126},
+    {"City": "Kanpur", "Latitude": 26.4499, "Longitude": 80.3319},
+    {"City": "Thiruvananthapuram", "Latitude": 8.5241, "Longitude": 76.9366},
+    {"City": "Vadodara", "Latitude": 22.3072, "Longitude": 73.1812},
+    {"City": "Mysore", "Latitude": 12.2958, "Longitude": 76.6394},
+    {"City": "Ranchi", "Latitude": 23.3441, "Longitude": 85.3096},
+    {"City": "Guwahati", "Latitude": 26.1445, "Longitude": 91.7362},
+    {"City": "Kochi", "Latitude": 9.9312, "Longitude": 76.2673},
+    {"City": "Vijayawada", "Latitude": 16.5062, "Longitude": 80.6480},
+    {"City": "Agra", "Latitude": 27.1767, "Longitude": 78.0081},
+    {"City": "Gwalior", "Latitude": 26.2183, "Longitude": 78.1828},
+    {"City": "Jodhpur", "Latitude": 26.2389, "Longitude": 73.0243},
+    {"City": "Shimla", "Latitude": 31.1048, "Longitude": 77.1734},
+    {"City": "Amritsar", "Latitude": 31.6340, "Longitude": 74.8723},
+    {"City": "Dehradun", "Latitude": 30.3165, "Longitude": 78.0322},
+    {"City": "Allahabad", "Latitude": 25.4358, "Longitude": 81.8463},
+    {"City": "Noida", "Latitude": 28.5355, "Longitude": 77.3910},
+    {"City": "Faridabad", "Latitude": 28.4089, "Longitude": 77.3178},
+    {"City": "Ghaziabad", "Latitude": 28.6692, "Longitude": 77.4538},
+    {"City": "Jabalpur", "Latitude": 23.1815, "Longitude": 79.9864},
+    {"City": "Raipur", "Latitude": 21.2514, "Longitude": 81.6296},
+    {"City": "Panaji", "Latitude": 15.4909, "Longitude": 73.8278},
+    {"City": "Madurai", "Latitude": 9.9252, "Longitude": 78.1198},
+    {"City": "Nashik", "Latitude": 19.9975, "Longitude": 73.7898},
+    {"City": "Thrissur", "Latitude": 10.5276, "Longitude": 76.2144},
+    {"City": "Guntur", "Latitude": 16.3067, "Longitude": 80.4365},
+    {"City": "Warangal", "Latitude": 17.9784, "Longitude": 79.5941},
+    {"City": "Tirupati", "Latitude": 13.6288, "Longitude": 79.4192},
+    {"City": "Aurangabad", "Latitude": 19.8762, "Longitude": 75.3433},
+    {"City": "Shillong", "Latitude": 25.5788, "Longitude": 91.8933},
+    {"City": "Udaipur", "Latitude": 24.5854, "Longitude": 73.7125},
+    {"City": "Ajmer", "Latitude": 26.4499, "Longitude": 74.6399},
+    {"City": "Pondicherry", "Latitude": 11.9416, "Longitude": 79.8083}
+    # Continue to 100 locations if required
+]
+
+    # Convert to a DataFrame if needed
+    city_df = pd.DataFrame(city_coordinates)
+
+        # Merge city_coordinates into address_data based on Location
+    address_data = pd.merge(
+        address_data,
+        city_coordinates,
+        left_on="Location",  # Column in address_data
+        right_on="City",     # Column in city_coordinates
+        how="left"           # Keep all rows from address_data
     )
+
+    # Drop redundant 'City' column if not needed
+    address_data.drop(columns=["City"], inplace=True)
+
 
     # Step 2: Upload Ordering Plan
     st.header("Step 2: Upload Ordering Plan File")
